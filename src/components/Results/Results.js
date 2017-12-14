@@ -1,42 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactHighCharts from 'react-highcharts';
+import PropTypes from 'prop-types';
 
-const config = {
-  chart: {
-    plotBackgroundColor: null,
-    plotBorderWidth: null,
-    plotShadow: false,
-    type: 'pie',
-  },
-  plotOptions: {
-    pie: {
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+class Results extends Component {
+  constructor(props) {
+    super(props);
+
+    const configBase = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
       },
-    },
-  },
-  series: [{
-    name: 'areaInSqKm',
-    colorByPoint: true,
-    data: [{
-      name: 'EU',
-      y: 73399692,
-    },
-    {
-      name: 'AS',
-      y: 9984670,
-    }],
-  }],
-};
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          },
+        },
+      },
+    };
+    this.state = {
+      pieAreaInSqKmConfig: {
+        ...configBase,
+        title: {
+          text: 'areaInSqKm',
+        },
+        series: [{
+          name: 'areaInSqKm',
+          colorByPoint: true,
+          data: this.props.pieAreaInSqKm.map(data => ({
+            name: data.countryName,
+            y: data.areaInSqKm,
+          })),
+        }],
+      },
+      piePopulationConfig: {
+        ...configBase,
+        title: {
+          text: 'population',
+        },
+        series: [{
+          name: 'population',
+          colorByPoint: true,
+          data: this.props.piePopulation.map(data => ({
+            name: data.countryName,
+            y: data.population,
+          })),
+        }],
+      }
+    };
+  }
 
-const Results = () => {
-  return (
-    <div>
-      <ReactHighCharts config={config} />
-      
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <ReactHighCharts config={this.state.pieAreaInSqKmConfig} />
+        <ReactHighCharts config={this.state.piePopulationConfig} />
+      </div>
+    );
+  }
+}
+
+Results.propTypes = {
+  pieAreaInSqKm: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Results;

@@ -23,17 +23,17 @@ export function sortContinentNames(geoData) {
   return continentsList.sort();
 }
 
-function calcurateOther(data) {
-  const areaInSqKm = data.reduce((sum, value) => {return sum + value.areaInSqKm}, 0);
+function calcurateOther(data, metric) {
+  const otherData = data.reduce((sum, value) => { return sum + value[metric]; }, 0);
   return [{
     countryName: 'Other',
-    areaInSqKm,
+    [metric]: otherData,
   }];
 }
 
-function formatForDisplay(data, max) {
+function formatForDisplay(data, metric, max) {
   const showData = data.slice(0, max);
-  const otherData = calcurateOther(data.slice(max));
+  const otherData = calcurateOther(data.slice(max), metric);
   return [
     ...showData,
     ...otherData,
@@ -41,8 +41,8 @@ function formatForDisplay(data, max) {
 }
 
 export function calculateDataForPie(geoData, metric, max) {
-  const areaInSqKm = alasql('SELECT countryName, SUM(areaInSqKm) AS areaInSqKm FROM ? GROUP BY countryName ORDER BY areaInSqKm DESC', [geoData]);
-  return formatForDisplay(areaInSqKm, max);
+  const sumData = alasql(`SELECT countryName, SUM(${metric}) AS ${metric} FROM ? GROUP BY countryName ORDER BY ${metric} DESC`, [geoData]);
+  return formatForDisplay(sumData, metric, max);
 }
 
 const config = {

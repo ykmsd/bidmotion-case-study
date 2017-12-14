@@ -9,35 +9,43 @@ class GeoNames extends Component {
     super();
 
     this.state = {
-      continent: 'ALL',
-      metric: 'ALL',
-      chartMax: 5,
+      continent: null,
+      metric: null,
+      chartMax: null,
       geoData: null,
       continentsList: [],
       pieAreaInSqKm: null,
+      piePopulation: null,
     };
 
     this.handleGoClick = this.handleGoClick.bind(this);
   }
   async handleGoClick() {
     const geoData = await getData();
-    this.setState({
-      geoData,
-    });
-    this.sortData(geoData);
-    
-  }
-  sortData = (geoData) => {
     const continentsList = sortContinentNames(geoData);
-    const pieAreaInSqKm = calculateDataForPie(geoData, 'ALL', 5);
     this.setState({
+      continent: 'ALL',
+      metric: 'ALL',
+      chartMax: 5,
+      geoData,
       continentsList,
-      pieAreaInSqKm,
     });
-    
+    this.sortData(geoData, 'ALL', 5);
+  }
+  sortData = (geoData, filter, max) => {
+    if (filter === 'ALL') {
+      const pieAreaInSqKm = calculateDataForPie(geoData, 'areaInSqKm', max);
+      const piePopulation = calculateDataForPie(geoData, 'population', max);
+
+      this.setState({
+        pieAreaInSqKm,
+        piePopulation,
+      });
+    }
+
   }
   render() {
-    console.log(this.state);
+    console.log(this.state.pieAreaInSqKm, this.state.piePopulation);
     return (
       <div>
         <Header handleGoClick={this.handleGoClick} />
@@ -47,9 +55,13 @@ class GeoNames extends Component {
           metric={this.state.metric}
           chartMax={this.state.chartMax}
         />
-        <Results
-          pieareaInSqKm={this.state.pieareaInSqKm}
-        />
+        {this.state.pieAreaInSqKm &&
+          <Results
+            pieAreaInSqKm={this.state.pieAreaInSqKm}
+            piePopulation={this.state.piePopulation}
+          />
+      }
+        
       </div>
     );
   }
