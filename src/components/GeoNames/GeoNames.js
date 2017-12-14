@@ -94,6 +94,7 @@ class GeoNames extends Component {
               piePopulation={this.state.piePopulation}
             />
             <Table
+              metric={this.state.metric}
               tableData={this.state.tableData}
               tableDataTotal={this.state.tableDataTotal}
             />
