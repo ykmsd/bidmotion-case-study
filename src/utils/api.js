@@ -75,3 +75,28 @@ export function calculateTableTotalValue(data) {
   };
 }
 
+export function sortTableData(data, columnName, sort) {
+  function compare(a, b) {
+    const A = a[columnName];
+    const B = b[columnName];
+
+    let first;
+    let second;
+    if (sort === 'desc') {
+      first = 1;
+      second = -1;
+    } else {
+      first = -1;
+      second = 1;
+    }
+
+    if (A > B) {
+      return first;
+    } else if (A < B) {
+      return second;
+    }
+    return 0; 
+  }
+
+  return data.sort(compare);
+}

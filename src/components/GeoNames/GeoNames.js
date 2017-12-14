@@ -10,6 +10,7 @@ import {
   filterGeoDataByContinent,
   calculateDataForTable,
   calculateTableTotalValue,
+  sortTableData,
 } from '../../utils/api';
 
 class GeoNames extends Component {
@@ -17,6 +18,7 @@ class GeoNames extends Component {
     super();
 
     this.state = {
+      disabled: true,
       continent: 'ALL',
       metric: 'ALL',
       chartMax: 5,
@@ -27,6 +29,12 @@ class GeoNames extends Component {
       piePopulation: null,
       tableData: null,
       tableDataTotal: [],
+      tableSort: {
+        continentName: 'desc',
+        countryName: 'desc',
+        areaInSqKm: 'desc',
+        population: 'desc',
+      },
     };
 
     this.handleGoClick = this.handleGoClick.bind(this);
@@ -35,6 +43,7 @@ class GeoNames extends Component {
     const geoDataAll = await getData();
     const continentsList = sortContinentNames(geoDataAll);
     this.setState({
+      disabled: false,
       currentGeoData: geoDataAll,
       geoDataAll,
       continentsList,
@@ -73,11 +82,22 @@ class GeoNames extends Component {
       chartMax,
     });
   }
+  handleTableClick = (columnName) => {
+    const tableData = sortTableData(this.state.tableData, columnName, this.state.tableSort[columnName]);
+    this.setState(prevState => ({
+      tableData,
+      tableSort: {
+        ...prevState.tableSort,
+        [columnName]: !prevState.tableSort[columnName],
+      },
+    }));
+  }
   render() {
     return (
       <div>
         <Header handleGoClick={this.handleGoClick} />
         <Filters
+          disabled={this.state.disabled}
           continentsList={this.state.continentsList}
           continent={this.state.continent}
           metric={this.state.metric}
@@ -97,6 +117,7 @@ class GeoNames extends Component {
               metric={this.state.metric}
               tableData={this.state.tableData}
               tableDataTotal={this.state.tableDataTotal}
+              handleTableClick={this.handleTableClick}
             />
           </div>
           

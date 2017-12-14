@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Table = ({ metric, tableData, tableDataTotal }) => { 
+const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => { 
   let firstColumn, table, total;
   if (metric === 'ALL') {
     firstColumn = (
       <tr>
-        <th>continentName</th>
-        <th>countryName</th>
-        <th>areaInSqKm</th>
-        <th>population</th>
+        <th onClick={() => handleTableClick('continentName')}>continentName</th>
+        <th onClick={() => handleTableClick('countryName')}>countryName</th>
+        <th onClick={() => handleTableClick('areaInSqKm')}>areaInSqKm</th>
+        <th onClick={() => handleTableClick('population')}>population</th>
       </tr>
     );
     table = tableData.map(data => (
@@ -30,9 +31,9 @@ const Table = ({ metric, tableData, tableDataTotal }) => {
   } else if (metric === 'areaInSqKm') {
     firstColumn = (
       <tr>
-        <th>continentName</th>
-        <th>countryName</th>
-        <th>areaInSqKm</th>
+        <th onClick={() => handleTableClick('continentName')}>continentName</th>
+        <th onClick={() => handleTableClick('countryName')}>countryName</th>
+        <th onClick={() => handleTableClick('areaInSqKm')}>areaInSqKm</th>
       </tr>
     );
     table = tableData.map(data => (
@@ -52,9 +53,9 @@ const Table = ({ metric, tableData, tableDataTotal }) => {
   } else {
     firstColumn = (
       <tr>
-        <th>continentName</th>
-        <th>countryName</th>
-        <th>population</th>
+        <th onClick={() => handleTableClick('continentName')}>continentName</th>
+        <th onClick={() => handleTableClick('countryName')}>countryName</th>
+        <th onClick={() => handleTableClick('population')}>population</th>
       </tr>
     );
     table = tableData.map(data => (
@@ -83,6 +84,13 @@ const Table = ({ metric, tableData, tableDataTotal }) => {
       </table>
     </div>
   );
+};
+
+Table.propTypes = {
+  metric: PropTypes.string.isRequired,
+  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableDataTotal: PropTypes.objectOf(PropTypes.number).isRequired,
+  handleTableClick: PropTypes.func.isRequired,
 };
 
 export default Table;
