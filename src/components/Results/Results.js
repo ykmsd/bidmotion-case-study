@@ -53,7 +53,31 @@ class Results extends Component {
       }
     };
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState(prevState => ({
+      pieAreaInSqKmConfig: {
+        ...prevState.pieAreaInSqKmConfig,
+        series: [{
+          ...prevState.pieAreaInSqKmConfig.series,
+          data: nextProps.pieAreaInSqKm.map(data => ({
+            name: data.countryName,
+            y: data.areaInSqKm,
+          })),
+        }],
+      },
+      piePopulationConfig: {
+        ...prevState.piePopulationConfig,
+        series: [{
+          ...prevState.piePopulationConfig.series,
+          data: nextProps.piePopulation.map(data => ({
+            name: data.countryName,
+            y: data.population,
+          })),
+        }],
+      },
+    }));
 
+  }
   render() {
     const {metric} = this.props;
     let pieChart;

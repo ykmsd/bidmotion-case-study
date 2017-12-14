@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const metricValues = ['ALL', 'areaInSqKm', 'population'];
 const chartMaxValues = [5, 10, 15, 20];
 
-const Filters = ({ continentsList, continent, metric, chartMax, handleMetricChange }) => {
+const Filters = ({ continentsList, continent, metric, chartMax, handleMetricChange, handleMaxChange }) => {
   return (
     <div>
       <select name="continent-names" value={continentsList}>
@@ -22,7 +22,7 @@ const Filters = ({ continentsList, continent, metric, chartMax, handleMetricChan
           </option>
         ))}
       </select>
-      <select name="chart-max" value={chartMax}>
+      <select name="chart-max" value={chartMax} onChange={e => handleMaxChange(parseInt((e.target.value), 10))}>
         {chartMaxValues.map(value => (
           <option value={value} key={`metric-${value}`}>
             {value}
@@ -39,6 +39,7 @@ Filters.propTypes = {
   metric: PropTypes.string.isRequired,
   chartMax: PropTypes.number.isRequired,
   handleMetricChange: PropTypes.func.isRequired,
+  handleMaxChange: PropTypes.func.isRequired,
 };
 
 

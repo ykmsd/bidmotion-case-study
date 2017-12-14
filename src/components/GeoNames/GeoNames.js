@@ -36,7 +36,7 @@ class GeoNames extends Component {
     if (filter === 'ALL') {
       const pieAreaInSqKm = calculateDataForPie(geoData, 'areaInSqKm', max);
       const piePopulation = calculateDataForPie(geoData, 'population', max);
-
+      
       this.setState({
         pieAreaInSqKm,
         piePopulation,
@@ -46,6 +46,12 @@ class GeoNames extends Component {
   handleMetricChange = (value) => {
     this.setState({
       metric: value,
+    });
+  }
+  handleMaxChange = (value) => {
+    this.sortData(this.state.geoData, this.state.metric, value);
+    this.setState({
+      chartMax: value,
     });
   }
   render() {
@@ -58,6 +64,7 @@ class GeoNames extends Component {
           metric={this.state.metric}
           chartMax={this.state.chartMax}
           handleMetricChange={this.handleMetricChange}
+          handleMaxChange={this.handleMaxChange}
         />
         {this.state.pieAreaInSqKm &&
           <Results
