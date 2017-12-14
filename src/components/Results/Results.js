@@ -106,7 +106,7 @@ class Results extends Component {
 }
 
 Results.propTypes = {
-  pieAreaInSqKm: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pieAreaInSqKm: PropTypes.arrayOf(PropTypes.object).isRequired,
   metric: PropTypes.string.isRequired,
 };
 

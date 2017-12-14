@@ -40,36 +40,11 @@ function formatForDisplay(data, metric, max) {
   ];
 }
 
+export function filterGeoDataByContinent(geoData, continent) {
+  return geoData.filter(data => data.continentName === continent);
+}
+
 export function calculateDataForPie(geoData, metric, max) {
   const sumData = alasql(`SELECT countryName, SUM(${metric}) AS ${metric} FROM ? GROUP BY countryName ORDER BY ${metric} DESC`, [geoData]);
   return formatForDisplay(sumData, metric, max);
 }
-
-const config = {
-  chart: {
-    plotBackgroundColor: null,
-    plotBorderWidth: null,
-    plotShadow: false,
-    type: 'pie',
-  },
-  plotOptions: {
-    pie: {
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-      },
-    },
-  },
-  series: [{
-    name: 'areaInSqKm',
-    colorByPoint: true,
-    data: [{
-      name: 'EU',
-      y: 80.22,
-    },
-    {
-      name: 'AS',
-      y: 19.88,
-    }],
-  }],
-};
