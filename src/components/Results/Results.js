@@ -21,11 +21,11 @@ const config = {
     colorByPoint: true,
     data: [{
       name: 'EU',
-      y: 80.22,
+      y: 73399692,
     },
     {
       name: 'AS',
-      y: 19.88,
+      y: 9984670,
     }],
   }],
 };

@@ -23,9 +23,26 @@ export function sortContinentNames(geoData) {
   return continentsList.sort();
 }
 
-export function calculateDataForPie(geoData, metric) {
+function calcurateOther(data) {
+  const areaInSqKm = data.reduce((sum, value) => {return sum + value.areaInSqKm}, 0);
+  return [{
+    countryName: 'Other',
+    areaInSqKm,
+  }];
+}
+
+function formatForDisplay(data, max) {
+  const showData = data.slice(0, max);
+  const otherData = calcurateOther(data.slice(max));
+  return [
+    ...showData,
+    ...otherData,
+  ];
+}
+
+export function calculateDataForPie(geoData, metric, max) {
   const areaInSqKm = alasql('SELECT countryName, SUM(areaInSqKm) AS areaInSqKm FROM ? GROUP BY countryName ORDER BY areaInSqKm DESC', [geoData]);
-  console.log(areaInSqKm);
+  return formatForDisplay(areaInSqKm, max);
 }
 
 const config = {

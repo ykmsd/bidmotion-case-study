@@ -14,6 +14,7 @@ class GeoNames extends Component {
       chartMax: 5,
       geoData: null,
       continentsList: [],
+      pieAreaInSqKm: null,
     };
 
     this.handleGoClick = this.handleGoClick.bind(this);
@@ -28,12 +29,15 @@ class GeoNames extends Component {
   }
   sortData = (geoData) => {
     const continentsList = sortContinentNames(geoData);
+    const pieAreaInSqKm = calculateDataForPie(geoData, 'ALL', 5);
     this.setState({
       continentsList,
+      pieAreaInSqKm,
     });
-    calculateDataForPie(geoData);
+    
   }
   render() {
+    console.log(this.state);
     return (
       <div>
         <Header handleGoClick={this.handleGoClick} />
@@ -43,7 +47,9 @@ class GeoNames extends Component {
           metric={this.state.metric}
           chartMax={this.state.chartMax}
         />
-        <Results />
+        <Results
+          pieareaInSqKm={this.state.pieareaInSqKm}
+        />
       </div>
     );
   }
