@@ -5,7 +5,9 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
     "styled-components": "^2.2.4"
   },
   "scripts": {
@@ -19,6 +21,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-preset-es2017": "^6.24.1",
     "chai": "^4.1.2",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
