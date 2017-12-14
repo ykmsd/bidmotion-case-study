@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactHighCharts from 'react-highcharts';
 import PropTypes from 'prop-types';
 
-class Results extends Component {
+class Pie extends Component {
   constructor(props) {
     super(props);
 
@@ -105,9 +105,9 @@ class Results extends Component {
   }
 }
 
-Results.propTypes = {
+Pie.propTypes = {
   pieAreaInSqKm: PropTypes.arrayOf(PropTypes.object).isRequired,
   metric: PropTypes.string.isRequired,
 };
 
-export default Results;
+export default Pie;

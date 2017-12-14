@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import Filters from '../Filters/Filters';
-import Results from '../Results/Results';
-import { getData, sortContinentNames, calculateDataForPie, filterGeoDataByContinent } from '../../utils/api';
+import Pie from '../Results/Pie';
+import Table from '../Results/Table';
+import {
+  getData,
+  sortContinentNames,
+  calculateDataForPie,
+  filterGeoDataByContinent,
+  calculateDataForTable,
+  calculateTableTotalValue,
+} from '../../utils/api';
 
 class GeoNames extends Component {
   constructor() {
@@ -17,6 +25,8 @@ class GeoNames extends Component {
       continentsList: [],
       pieAreaInSqKm: null,
       piePopulation: null,
+      tableData: null,
+      tableDataTotal: [],
     };
 
     this.handleGoClick = this.handleGoClick.bind(this);
@@ -25,9 +35,6 @@ class GeoNames extends Component {
     const geoDataAll = await getData();
     const continentsList = sortContinentNames(geoDataAll);
     this.setState({
-      continent: 'ALL',
-      metric: 'ALL',
-      chartMax: 5,
       currentGeoData: geoDataAll,
       geoDataAll,
       continentsList,
@@ -37,10 +44,14 @@ class GeoNames extends Component {
   sortData = (geoData, filter, max) => {
     const pieAreaInSqKm = calculateDataForPie(geoData, 'areaInSqKm', max);
     const piePopulation = calculateDataForPie(geoData, 'population', max);
-    
+    const tableData = calculateDataForTable(geoData);
+    const tableDataTotal = calculateTableTotalValue(geoData);
+
     this.setState({
       pieAreaInSqKm,
       piePopulation,
+      tableData,
+      tableDataTotal,
     });
   }
   handleContinentChange = (continent) => {
@@ -76,13 +87,19 @@ class GeoNames extends Component {
           handleMaxChange={this.handleMaxChange}
         />
         {this.state.pieAreaInSqKm &&
-          <Results
-            metric={this.state.metric}
-            pieAreaInSqKm={this.state.pieAreaInSqKm}
-            piePopulation={this.state.piePopulation}
-          />
+          <div>
+            <Pie
+              metric={this.state.metric}
+              pieAreaInSqKm={this.state.pieAreaInSqKm}
+              piePopulation={this.state.piePopulation}
+            />
+            <Table
+              tableData={this.state.tableData}
+              tableDataTotal={this.state.tableDataTotal}
+            />
+          </div>
+          
       }
-        
       </div>
     );
   }

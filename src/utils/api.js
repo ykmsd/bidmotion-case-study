@@ -24,7 +24,7 @@ export function sortContinentNames(geoData) {
 }
 
 function calcurateOther(data, metric) {
-  const otherData = data.reduce((sum, value) => { return sum + value[metric]; }, 0);
+  const otherData = data.reduce((sum, val) => { return sum + val[metric]; }, 0);
   return [{
     countryName: 'Other',
     [metric]: otherData,
@@ -48,3 +48,30 @@ export function calculateDataForPie(geoData, metric, max) {
   const sumData = alasql(`SELECT countryName, SUM(${metric}) AS ${metric} FROM ? GROUP BY countryName ORDER BY ${metric} DESC`, [geoData]);
   return formatForDisplay(sumData, metric, max);
 }
+
+export function calculateDataForTable(geoData) {
+  function compare(a, b) {
+    const continentNameA = a.continentName.toUpperCase();
+    const continentNameB = b.continentName.toUpperCase();
+    
+    if (continentNameA > continentNameB) {
+      return 1;
+    } else if (continentNameA < continentNameB) {
+      return -1;
+    }
+    return 0;
+  }
+
+  return geoData.sort(compare);
+}
+
+export function calculateTableTotalValue(data) {
+  const areaInSqKmTotal = data.reduce((sum, val) => { return sum + val.areaInSqKm; }, 0);
+  const populationTotal = data.reduce((sum, val) => {return sum + val.population}, 0);
+
+  return {
+    areaInSqKm: areaInSqKmTotal,
+    population: populationTotal,
+  };
+}
+
