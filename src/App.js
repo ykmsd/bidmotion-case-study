@@ -1,11 +1,9 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Filters from './components/Filters/Filters';
+import GeoNames from './components/GeoNames/GeoNames';
 
 const App = () => (
   <div>
-    <Header />
-    <Filters />
+    <GeoNames />
   </div>
 );
 

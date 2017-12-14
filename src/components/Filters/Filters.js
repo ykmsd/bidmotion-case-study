@@ -1,48 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const metricValues = ['ALL', 'areaInSqKm', 'population'];
 const chartMaxValues = [5, 10, 15, 20];
 
-class Filters extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      metricValue: 'ALL',
-      chartMaxValue: 5,
-    };
-  }
-  handleMetricChange = (e) => {
-    this.setState({
-      metricValue: e.target.value,
-    });
-  };
-  handleChartMaxChange = (e) => {
-    this.setState({
-      chartMaxValue: e.target.value,
-    });
-  }
-  render() {
-    return (
-      <div>
-        <select name="continent-names"></select>
-        <select name="metric" onChange={this.handleMetricChange} value={this.state.metricValue}>
-          {metricValues.map(value => (
-            <option value={value} key={`metric-${value}`}>
+const Filters = ({ continentsList, continent, metric, chartMax }) => {
+  return (
+    <div>
+      <select name="continent-names" value={continentsList}>
+        {continentsList !== [] &&
+          continentsList.map(value => (
+            <option value={value} key={`continent-${value}`}>
               {value}
             </option>
           ))}
-        </select>
-        <select name="chart-max" onChange={this.handleChartMaxChange} value={this.state.chartMaxValue}>
-          {chartMaxValues.map(value => (
-            <option value={value} key={`metric-${value}`}>
+      </select>
+      <select name="metric" value={metric}>
+        {metricValues.map(value => (
+          <option value={value} key={`metric-${value}`}>
             {value}
-          </option> 
-          ))}
-        </select>
-      </div>
-    );
-  }
+          </option>
+        ))}
+      </select>
+      <select name="chart-max" value={chartMax}>
+        {chartMaxValues.map(value => (
+          <option value={value} key={`metric-${value}`}>
+          {value}
+        </option> 
+        ))}
+      </select>
+    </div>
+  );
 };
+
+Filters.propTypes = {
+  continentsList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  continent: PropTypes.string.isRequired,
+  metric: PropTypes.string.isRequired,
+  chartMax: PropTypes.number.isRequired,
+};
+
 
 export default Filters;

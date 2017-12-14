@@ -30,6 +30,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "prop-types": "^15.6.0",
     "react-test-renderer": "^16.2.0",
     "selenium-standalone": "^6.12.0",
     "wdio-dot-reporter": "0.0.9",
