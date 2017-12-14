@@ -11,6 +11,7 @@ describe('Filters', () => {
 
   const handleMetricChangeMock = jest.fn();
   const handleMaxChangeMock = jest.fn();
+  const handleContinentChangeMock = jest.fn();
 
   const props = {
     continentsList: ['Europe', 'Africa', 'Asia'],
@@ -19,6 +20,8 @@ describe('Filters', () => {
     chartMax: 5,
     handleMetricChange: handleMetricChangeMock,
     handleMaxChange: handleMaxChangeMock,
+    handleContinentChange: handleContinentChangeMock,
+    disabled: false,
   };
 
   const component = shallow(<Filters {...props} />);

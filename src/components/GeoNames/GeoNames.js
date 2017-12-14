@@ -12,6 +12,7 @@ import {
   calculateTableTotalValue,
   sortTableData,
 } from '../../utils/api';
+import '../../styles/style.css';
 
 class GeoNames extends Component {
   constructor() {

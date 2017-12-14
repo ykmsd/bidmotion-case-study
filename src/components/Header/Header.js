@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Header = ({ handleGoClick }) => (
-  <div>
+  <div className="header">
     <h1>Hydrane Frontend Dev CS</h1>
     <button label="Go" onClick={handleGoClick}>Go</button>
   </div>

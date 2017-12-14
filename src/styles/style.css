@@ -1,0 +1,40 @@
+.header {
+  text-align: center;
+  margin-bottom: 20px; }
+  .header button {
+    background-color: #64B5F6;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    width: 200px;
+    height: 40px; }
+
+.filters {
+  text-align: center; }
+  .filters select {
+    width: 100px;
+    height: 20px;
+    margin-right: 10px; }
+
+.pie__charts {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center; }
+
+.table table {
+  border-collapse: collapse;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left; }
+  .table table tr th {
+    font-weight: normal; }
+
+.table__first-column {
+  background: #BBDEFB;
+  font-size: 24px;
+  height: 40px; }
+
+.table__last-column {
+  background: #BBDEFB;
+  font-size: 24px;
+  height: 40px; }

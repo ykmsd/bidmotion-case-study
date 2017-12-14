@@ -6,7 +6,7 @@ const chartMaxValues = [5, 10, 15, 20];
 
 const Filters = ({ disabled, continentsList, continent, metric, chartMax, handleMetricChange, handleMaxChange, handleContinentChange }) => {
   return (
-    <div>
+    <div className="filters">
       <select name="continent-names" value={continent} onChange={e => handleContinentChange(e.target.value)} disabled={disabled}>
         {continentsList !== [] &&
           continentsList.map(value => (

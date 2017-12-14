@@ -18,6 +18,9 @@ class Pie extends Component {
           dataLabels: {
             enabled: true,
             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            style: {
+              width: '600px',
+            },
           },
         },
       },
@@ -83,7 +86,7 @@ class Pie extends Component {
     let pieChart;
     if (metric === 'ALL') {
       pieChart = (
-        <div>
+        <div className="pie__charts">
           <ReactHighCharts config={this.state.pieAreaInSqKmConfig} />
           <ReactHighCharts config={this.state.piePopulationConfig} />
         </div>
@@ -98,7 +101,7 @@ class Pie extends Component {
       );
     }
     return (
-      <div>
+      <div className="pie">
         { pieChart }
       </div>
     );

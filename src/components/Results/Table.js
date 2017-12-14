@@ -5,7 +5,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
   let firstColumn, table, total;
   if (metric === 'ALL') {
     firstColumn = (
-      <tr>
+      <tr className="table__first-column">
         <th onClick={() => handleTableClick('continentName')}>continentName</th>
         <th onClick={() => handleTableClick('countryName')}>countryName</th>
         <th onClick={() => handleTableClick('areaInSqKm')}>areaInSqKm</th>
@@ -21,7 +21,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
       </tr>
     ));
     total = (
-      <tr>
+      <tr className="table__last-column">
         <th />
         <th>TOTAL</th>
         <th>{tableDataTotal.areaInSqKm}</th>
@@ -30,7 +30,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
     );
   } else if (metric === 'areaInSqKm') {
     firstColumn = (
-      <tr>
+      <tr className="table__first-column">
         <th onClick={() => handleTableClick('continentName')}>continentName</th>
         <th onClick={() => handleTableClick('countryName')}>countryName</th>
         <th onClick={() => handleTableClick('areaInSqKm')}>areaInSqKm</th>
@@ -44,7 +44,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
       </tr>
     ));
     total = (
-      <tr>
+      <tr className="table__last-column">
         <th />
         <th>TOTAL</th>
         <th>{tableDataTotal.areaInSqKm}</th>
@@ -52,7 +52,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
     );
   } else {
     firstColumn = (
-      <tr>
+      <tr className="table__first-column">
         <th onClick={() => handleTableClick('continentName')}>continentName</th>
         <th onClick={() => handleTableClick('countryName')}>countryName</th>
         <th onClick={() => handleTableClick('population')}>population</th>
@@ -66,7 +66,7 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
       </tr>
     ));
     total = (
-      <tr>
+      <tr className="table__last-column">
         <th />
         <th>TOTAL</th>
         <th>{tableDataTotal.population}</th>
@@ -74,9 +74,9 @@ const Table = ({ metric, tableData, tableDataTotal, handleTableClick }) => {
     );
   }
   return (
-    <div>
+    <div className="table">
       <table>
-        <tbody>
+        <tbody className="table__data">
           { firstColumn }
           { table }
           { total }
