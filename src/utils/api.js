@@ -1,3 +1,5 @@
+import alasql from 'alasql';
+
 export async function getData() {
   const url = 'http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane';
   const res = await fetch(url).then(data => data.json());
@@ -6,8 +8,8 @@ export async function getData() {
       {
         continentName: geo.continentName,
         countryName: geo.countryName,
-        areaInSqKm: geo.areaInSqKm,
-        population: geo.population,
+        areaInSqKm: parseInt(geo.areaInSqKm, 10),
+        population: parseInt(geo.population, 10),
       }
     ));
   return requiredData;
@@ -22,9 +24,8 @@ export function sortContinentNames(geoData) {
 }
 
 export function calculateDataForPie(geoData, metric) {
-  // geoData.map({
-
-  // });
+  const areaInSqKm = alasql('SELECT countryName, SUM(areaInSqKm) AS areaInSqKm FROM ? GROUP BY countryName ORDER BY areaInSqKm DESC', [geoData]);
+  console.log(areaInSqKm);
 }
 
 const config = {

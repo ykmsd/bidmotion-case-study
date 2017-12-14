@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import Filters from '../Filters/Filters';
 import Results from '../Results/Results';
-import { getData, sortContinentNames } from '../../utils/api';
+import { getData, sortContinentNames, calculateDataForPie } from '../../utils/api';
 
 class GeoNames extends Component {
   constructor() {
@@ -23,14 +23,15 @@ class GeoNames extends Component {
     this.setState({
       geoData,
     });
-    console.log(geoData);
     this.sortData(geoData);
+    
   }
   sortData = (geoData) => {
     const continentsList = sortContinentNames(geoData);
     this.setState({
       continentsList,
     });
+    calculateDataForPie(geoData);
   }
   render() {
     return (
