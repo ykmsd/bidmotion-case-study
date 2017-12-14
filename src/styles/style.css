@@ -16,14 +16,16 @@
     height: 20px;
     margin-right: 10px; }
 
-.pie__charts {
-  margin-top: 60px;
-  display: flex;
-  justify-content: center; }
+.pie {
+  margin-bottom: 40px; }
+  .pie__charts {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center; }
 
 .table table {
   border-collapse: collapse;
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   text-align: left; }
   .table table tr th {

@@ -65,12 +65,17 @@ class GeoNames extends Component {
     });
   }
   handleContinentChange = (continent) => {
-    const currentGeoData = filterGeoDataByContinent(this.state.geoDataAll, continent);
-    this.sortData(currentGeoData, this.state.metric, this.state.chartMax);
-    this.setState({
-      continent,
-      currentGeoData,
-    });
+    if (continent !== 'ALL') {
+      const currentGeoData = filterGeoDataByContinent(this.state.geoDataAll, continent);
+      this.sortData(currentGeoData, this.state.metric, this.state.chartMax);
+      this.setState({
+        continent,
+        currentGeoData,
+      });
+    }
+    else {
+      this.sortData(this.state.geoDataAll, 'ALL', this.state.chartMax);
+    }
   } 
   handleMetricChange = (metric) => {
     this.setState({
