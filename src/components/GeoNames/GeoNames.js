@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import Filters from '../Filters/Filters';
-import { getData } from '../../utils/api';
+import Results from '../Results/Results';
+import { getData, sortContinentNames } from '../../utils/api';
 
 class GeoNames extends Component {
   constructor() {
@@ -22,13 +23,11 @@ class GeoNames extends Component {
     this.setState({
       geoData,
     });
-    this.sortContinentNames(geoData);
+    console.log(geoData);
+    this.sortData(geoData);
   }
-  sortContinentNames = (geoData) => {
-    const continentsList = ['ALL'];
-    geoData.map(data => (
-      continentsList.includes(data.continent) === false && continentsList.push(data.continent)
-    ));
+  sortData = (geoData) => {
+    const continentsList = sortContinentNames(geoData);
     this.setState({
       continentsList,
     });
@@ -43,6 +42,7 @@ class GeoNames extends Component {
           metric={this.state.metric}
           chartMax={this.state.chartMax}
         />
+        <Results />
       </div>
     );
   }
