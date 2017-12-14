@@ -5,9 +5,21 @@ import { shallow, mount, render } from 'enzyme';
 import Filters from './Filters';
 
 describe('Filters', () => {
-  let component = shallow(<Filters />);
-  const metricChangeMock = jest.fn();
-  const chartChangeMock = jest.fn();
+
+  // const metricChangeMock = jest.fn();
+  // const chartChangeMock = jest.fn();
+
+  const handleMetricChangeMock = jest.fn();
+
+  const props = {
+    continentsList: ['Europe', 'Africa', 'Asia'],
+    continent: 'Europe',
+    metric: 'ALL',
+    chartMax: 5,
+    handleMetricChange: handleMetricChangeMock,
+  };
+
+  const component = shallow(<Filters {...props} />);
 
   it('Should render successfully', () => {
     expect(component.exists()).toEqual(true);

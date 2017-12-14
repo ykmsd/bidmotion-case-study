@@ -55,10 +55,27 @@ class Results extends Component {
   }
 
   render() {
+    const {metric} = this.props;
+    let pieChart;
+    if (metric === 'ALL') {
+      pieChart = (
+        <div>
+          <ReactHighCharts config={this.state.pieAreaInSqKmConfig} />
+          <ReactHighCharts config={this.state.piePopulationConfig} />
+        </div>
+      );
+    } else if (metric === 'areaInSqKm') {
+      pieChart = (
+        <ReactHighCharts config={this.state.pieAreaInSqKmConfig} />
+      );
+    } else {
+      pieChart = (
+        <ReactHighCharts config={this.state.piePopulationConfig} />
+      );
+    }
     return (
       <div>
-        <ReactHighCharts config={this.state.pieAreaInSqKmConfig} />
-        <ReactHighCharts config={this.state.piePopulationConfig} />
+        { pieChart }
       </div>
     );
   }
@@ -66,6 +83,7 @@ class Results extends Component {
 
 Results.propTypes = {
   pieAreaInSqKm: PropTypes.arrayOf(PropTypes.string).isRequired,
+  metric: PropTypes.string.isRequired,
 };
 
 export default Results;

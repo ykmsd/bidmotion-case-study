@@ -9,9 +9,9 @@ class GeoNames extends Component {
     super();
 
     this.state = {
-      continent: null,
-      metric: null,
-      chartMax: null,
+      continent: 'ALL',
+      metric: 'ALL',
+      chartMax: 5,
       geoData: null,
       continentsList: [],
       pieAreaInSqKm: null,
@@ -42,10 +42,13 @@ class GeoNames extends Component {
         piePopulation,
       });
     }
-
+  }
+  handleMetricChange = (value) => {
+    this.setState({
+      metric: value,
+    });
   }
   render() {
-    console.log(this.state.pieAreaInSqKm, this.state.piePopulation);
     return (
       <div>
         <Header handleGoClick={this.handleGoClick} />
@@ -54,9 +57,11 @@ class GeoNames extends Component {
           continent={this.state.continent}
           metric={this.state.metric}
           chartMax={this.state.chartMax}
+          handleMetricChange={this.handleMetricChange}
         />
         {this.state.pieAreaInSqKm &&
           <Results
+            metric={this.state.metric}
             pieAreaInSqKm={this.state.pieAreaInSqKm}
             piePopulation={this.state.piePopulation}
           />

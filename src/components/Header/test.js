@@ -1,4 +1,4 @@
-/* global expect, it, describe, jest */
+/* global expect, it, describe, jest, beforeEach */
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
@@ -7,9 +7,14 @@ import Header from './Header';
 describe('Header component', () => {
   let component;
   const clickMock = jest.fn();
+  const goClickMock = jest.fn();
+
+  const props = {
+    handleGoClick: goClickMock,
+  };
 
   beforeEach(() => {
-    component = shallow(<Header />)
+    component = shallow(<Header {...props} />)
   });
 
   it('Should render successfully"', () => {  
