@@ -19,7 +19,8 @@ class GeoNames extends Component {
     super();
 
     this.state = {
-      disabled: true,
+      filterDisabled: true,
+      buttonDisabled: false,
       continent: 'ALL',
       metric: 'ALL',
       chartMax: 5,
@@ -44,7 +45,8 @@ class GeoNames extends Component {
     const geoDataAll = await getData();
     const continentsList = sortContinentNames(geoDataAll);
     this.setState({
-      disabled: false,
+      filterDisabled: false,
+      buttonDisabled: true,
       currentGeoData: geoDataAll,
       geoDataAll,
       continentsList,
@@ -101,9 +103,12 @@ class GeoNames extends Component {
   render() {
     return (
       <div>
-        <Header handleGoClick={this.handleGoClick} />
+        <Header
+          handleGoClick={this.handleGoClick}
+          disabled={this.state.buttonDisabled}
+        />
         <Filters
-          disabled={this.state.disabled}
+          disabled={this.state.filterDisabled}
           continentsList={this.state.continentsList}
           continent={this.state.continent}
           metric={this.state.metric}

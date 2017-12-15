@@ -9,6 +9,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-highcharts": "^15.0.0",
+    "react-infinite": "^0.12.1",
     "react-scripts": "1.0.17"
   },
   "scripts": {
