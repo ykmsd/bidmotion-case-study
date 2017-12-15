@@ -95,7 +95,7 @@ export function sortTableData(data, columnName, sort) {
     } else if (A < B) {
       return second;
     }
-    return 0; 
+    return 0;
   }
 
   return data.sort(compare);

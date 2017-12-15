@@ -96,7 +96,7 @@ class GeoNames extends Component {
       tableData,
       tableSort: {
         ...prevState.tableSort,
-        [columnName]: !prevState.tableSort[columnName],
+        [columnName]: prevState.tableSort[columnName] === 'desc' ? 'asec' : 'desc',
       },
     }));
   }
