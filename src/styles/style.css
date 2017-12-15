@@ -28,8 +28,10 @@
   width: 70%;
   margin: 0 auto;
   text-align: left; }
-  .table table tr th {
-    font-weight: normal; }
+  .table table tr {
+    cursor: pointer; }
+    .table table tr th {
+      font-weight: normal; }
 
 .table__first-column {
   background: #BBDEFB;
