@@ -13,14 +13,15 @@ class Pie extends Component {
         plotShadow: false,
         type: 'pie',
       },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
       plotOptions: {
         pie: {
           dataLabels: {
             enabled: true,
             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              width: '600px',
-            },
+
           },
         },
       },
