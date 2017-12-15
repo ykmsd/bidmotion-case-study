@@ -74,11 +74,10 @@ class GeoNames extends Component {
         continent,
         currentGeoData,
       });
-    }
-    else {
+    } else {
       this.sortData(this.state.geoDataAll, 'ALL', this.state.chartMax);
     }
-  } 
+  }
   handleMetricChange = (metric) => {
     this.setState({
       metric,
@@ -91,7 +90,10 @@ class GeoNames extends Component {
     });
   }
   handleTableClick = (columnName) => {
-    const tableData = sortTableData(this.state.tableData, columnName, this.state.tableSort[columnName]);
+    const tableData = sortTableData(
+      this.state.tableData, columnName,
+      this.state.tableSort[columnName],
+    );
     this.setState(prevState => ({
       tableData,
       tableSort: {
@@ -131,7 +133,6 @@ class GeoNames extends Component {
               handleTableClick={this.handleTableClick}
             />
           </div>
-          
       }
       </div>
     );

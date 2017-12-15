@@ -53,7 +53,7 @@ class Pie extends Component {
             y: data.population,
           })),
         }],
-      }
+      },
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -79,10 +79,9 @@ class Pie extends Component {
         }],
       },
     }));
-
   }
   render() {
-    const {metric} = this.props;
+    const { metric } = this.props;
     let pieChart;
     if (metric === 'ALL') {
       pieChart = (
@@ -110,6 +109,7 @@ class Pie extends Component {
 
 Pie.propTypes = {
   pieAreaInSqKm: PropTypes.arrayOf(PropTypes.object).isRequired,
+  piePopulation: PropTypes.arrayOf(PropTypes.object).isRequired,
   metric: PropTypes.string.isRequired,
 };
 

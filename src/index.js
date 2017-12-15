@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import GeoNames from './components/GeoNames/GeoNames';
 import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <GeoNames />,
   document.getElementById('root'));
 registerServiceWorker();
