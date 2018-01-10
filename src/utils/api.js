@@ -8,8 +8,8 @@ export async function getData() {
       {
         continentName: geo.continentName,
         countryName: geo.countryName,
-        areaInSqKm: parseInt(geo.areaInSqKm, 10),
-        population: parseInt(geo.population, 10),
+        areaInSqKm: Number(geo.areaInSqKm),
+        population: Number(geo.population),
       }
     ));
   return requiredData;
@@ -24,7 +24,7 @@ export function sortContinentNames(geoData) {
 }
 
 function calcurateOther(data, metric) {
-  const otherData = data.reduce((sum, val) => { return sum + val[metric]; }, 0);
+  const otherData = data.reduce((sum, val) => sum + val[metric], 0);
   return [{
     countryName: 'Other',
     [metric]: otherData,
@@ -66,8 +66,8 @@ export function calculateDataForTable(geoData) {
 }
 
 export function calculateTableTotalValue(data) {
-  const areaInSqKmTotal = data.reduce((sum, val) => { return sum + val.areaInSqKm; }, 0);
-  const populationTotal = data.reduce((sum, val) => {return sum + val.population}, 0);
+  const areaInSqKmTotal = data.reduce((sum, val) => sum + val.areaInSqKm, 0);
+  const populationTotal = data.reduce((sum, val) => sum + val.population, 0);
 
   return {
     areaInSqKm: areaInSqKmTotal,

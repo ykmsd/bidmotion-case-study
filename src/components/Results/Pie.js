@@ -15,7 +15,7 @@ class Pie extends Component {
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
+      },
       plotOptions: {
         pie: {
           dataLabels: {
